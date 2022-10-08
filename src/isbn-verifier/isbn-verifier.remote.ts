@@ -22,9 +22,7 @@ export default class Remote {
       console.log(`remote.ts... Extracting xml arguments, ${args}`);
       let remoteResponse = await axios.post(url, args, headers);
       console.log(`remote.ts... Remote response, ${remoteResponse.data}`);
-      remoteResponse = JSON.parse(
-        JSON.stringify(await Parser.convertXMLToJSON(remoteResponse.data)),
-      );
+      remoteResponse = await Parser.convertXMLToJSON(remoteResponse.data);
 
       console.log('remote.ts', { remoteResponse });
       let result = remoteResponse['soap:Body']['m:IsValidISBN13Response'];
